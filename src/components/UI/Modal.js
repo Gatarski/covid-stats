@@ -9,11 +9,11 @@ const Modal = (props) => {
         <header className='header'>
           <h2>{props.title}</h2>
         </header>
-        <div className='content'>
+        <div>
           <p>{props.message}</p>
         </div>
         <footer className='actions'>
-        <Button onClick={props.onClick}>Okay</Button>
+          <Button onClick={props.onClick}>Okay</Button>
         </footer>
       </div>
     </div>
