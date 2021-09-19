@@ -2,7 +2,7 @@ import RequestData from './components/RequestData/RequestData';
 import CountryData from './components/Country/CountryData';
 import covid from './assets/images/covid-19.png'
 import './App.css';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 let openedData = false;
 
@@ -21,7 +21,7 @@ function App() {
   };
  
   return (
-    <div>
+    <React.Fragment>
       <div className="image">
         <img src={covid} alt="covid-19"></img>
       </div>
@@ -30,7 +30,7 @@ function App() {
         <RequestData onData={dataFromInputsHandler}/>
         {openedData ? <CountryData value={data} onData={closeCountryData}/> : null}
       </div>
-    </div>
+    </React.Fragment>
   );
 }
 

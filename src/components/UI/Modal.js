@@ -1,9 +1,10 @@
+import React from "react";
 import Button from "./Button";
 import './Modal.css'
 
 const Modal = (props) => {
   return (
-    <div>
+    <React.Fragment>
       <div className='backdrop'></div>
       <div className='modal'>
         <header className='header'>
@@ -16,7 +17,7 @@ const Modal = (props) => {
           <Button onClick={props.onClick}>Okay</Button>
         </footer>
       </div>
-    </div>
+    </React.Fragment>
   )
 }
 

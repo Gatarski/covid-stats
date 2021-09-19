@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Modal from '../UI/Modal';
 import './CountryData.css'
 
@@ -39,7 +39,7 @@ const CountryData = (props) => {
     }
 
   return(
-    <div>
+    <React.Fragment>
       <h2>Country: {countryData.country}</h2>
       <span>
         <div className="data">Cases: {countryData.cases}</div>
@@ -49,7 +49,7 @@ const CountryData = (props) => {
       <div className="data-info">Data from: https://corona.lmao.ninja/v2/</div>
       {modalMessage ? <Modal title="Error" message={`Country ${modalMessage} does not exist.`
       } onClick={clickButtonHandler}></Modal> : null}
-    </div>
+    </React.Fragment>
   )
 };
 
