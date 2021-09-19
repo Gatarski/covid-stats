@@ -1,0 +1,23 @@
+.button{
+  background-color: white;
+  color: black;
+  font: inherit;
+  border: 2px solid black;
+  padding: 10px 40px;
+  margin: 10px 40%;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: black;
+  color: white;
+}
+
+.button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  cursor: auto;
+}

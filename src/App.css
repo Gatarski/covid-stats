@@ -1,0 +1,16 @@
+.main-app {
+  text-align: center;
+  border: 7px black solid;
+  margin: 15px 25%;
+  padding: 50px 0px;
+  background: lightgray;
+  border-radius: 10px;
+}
+
+.image {
+  text-align: center;
+}
+
+.image:hover {
+ /* tutaj moge dodac np.: powiekszanie sie obrazka */
+}
