@@ -8,6 +8,7 @@
 }
 
 .modal {
+  text-align: center;
   position: fixed;
   top: 30vh;
   overflow: hidden;
