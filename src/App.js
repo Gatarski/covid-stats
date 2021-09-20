@@ -7,8 +7,7 @@ import React, { useState } from 'react';
 let openedData = false;
 
 function App() {
-  const [data, setData] = useState({
-  })
+  const [data, setData] = useState({})
 
   const dataFromInputsHandler = (dataFromInputs) => {
     openedData = true;

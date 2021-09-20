@@ -5,3 +5,6 @@
   display: inline-block;
 }
 
+::placeholder {
+  text-align: center;
+}
