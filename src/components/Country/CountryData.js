@@ -8,6 +8,7 @@ let countryData = {};
 const CountryData = (props) => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState({});
+  let countryFlag = '';
   const [modalMessage, setModalMessage] = useState();
 
 
@@ -25,12 +26,13 @@ const CountryData = (props) => {
       return item.country === countryName;
     });
   };
-
-    if (getDataByCountry(props.value.country)) {
-      countryData = getDataByCountry(props.value.country); 
+  
+    if (getDataByCountry(props.value)) {
+      countryData = getDataByCountry(props.value); 
+      countryFlag = countryData.countryInfo.flag;
     } else {
       if (!modalMessage) {
-        setModalMessage(props.value.country);
+        setModalMessage(props.value);
       }
     }
   
@@ -40,7 +42,9 @@ const CountryData = (props) => {
 
   return(
     <React.Fragment>
-      <h2>Country: {countryData.country}</h2>
+      <h2>Country: {countryData.country}
+       <img className="flag" src={countryFlag} alt="flag"></img>
+      </h2>
       <span>
         <div className="data">Cases: {countryData.cases}</div>
         <div className="data">Deaths: {countryData.deaths}</div>
