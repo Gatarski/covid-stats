@@ -2,14 +2,16 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import Modal from '../UI/Modal';
 import './CountryData.css'
+import DetailedCountryData from './DetailedCountryData'
 
 let countryData = {};
 
 const CountryData = (props) => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState({});
-  let countryFlag = '';
   const [modalMessage, setModalMessage] = useState();
+  let countryFlag = '';
+  const detailedData = props.value.checkbox;
 
   if (isLoading) {
     axios.get('https://corona.lmao.ninja/v2/countries?yesterday=&sort=')
@@ -38,8 +40,7 @@ const CountryData = (props) => {
     const clickButtonHandler = () => {
       props.onData()
     }
-    // DODAC dodatkowe info jak jest zaznaczony checkbox
-    console.log(props.value)
+
   return(
     <React.Fragment>
       <h2>Country: {countryData.country}
@@ -56,6 +57,7 @@ const CountryData = (props) => {
           <div className="data-recovered">{countryData.recovered}</div>
         </div>
       </span>
+      {detailedData ? <DetailedCountryData data={countryData}/> : null}
       <div className="data-info">Data from: https://corona.lmao.ninja/v2/</div>
       {modalMessage ? <Modal title="Error" message={`Country ${modalMessage} does not exist.`
       } onClick={clickButtonHandler}></Modal> : null}

@@ -42,7 +42,7 @@ const RequestData = (props) => {
       </div>
       <div className="checkbox">
         <input type="checkbox" disabled={btnDisabled} ref={checkboxRef}></input>
-        <span>Show more details</span>
+        <span>Show more detailed data</span>
       </div>
       <Button className="btn" disabled={btnDisabled} type="submit">Send</Button>
     </form>
