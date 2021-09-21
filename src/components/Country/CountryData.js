@@ -11,7 +11,6 @@ const CountryData = (props) => {
   let countryFlag = '';
   const [modalMessage, setModalMessage] = useState();
 
-
   if (isLoading) {
     axios.get('https://corona.lmao.ninja/v2/countries?yesterday=&sort=')
     .then(respone => {
@@ -27,19 +26,20 @@ const CountryData = (props) => {
     });
   };
   
-    if (getDataByCountry(props.value)) {
-      countryData = getDataByCountry(props.value); 
+    if (getDataByCountry(props.value.country)) {
+      countryData = getDataByCountry(props.value.country); 
       countryFlag = countryData.countryInfo.flag;
     } else {
       if (!modalMessage) {
-        setModalMessage(props.value);
+        setModalMessage(props.value.country);
       }
     }
   
     const clickButtonHandler = () => {
       props.onData()
     }
-
+    // DODAC dodatkowe info jak jest zaznaczony checkbox
+    console.log(props.value)
   return(
     <React.Fragment>
       <h2>Country: {countryData.country}

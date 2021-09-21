@@ -11,14 +11,14 @@ function App() {
 
   const dataFromInputsHandler = (dataFromInputs) => {
     openedData = true;
-    setData(dataFromInputs)
+    setData(dataFromInputs);
   };
 
   const closeCountryData = ()  => {
     openedData = false;
     setData({});
   };
- 
+
   return (
     <React.Fragment>
       <div className="image">

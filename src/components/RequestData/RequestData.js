@@ -3,14 +3,19 @@ import Button from '../UI/Button';
 import './RequestData.css'
 
 const RequestData = (props) => {
-  let countryName = '';
+  const countryData = {
+    country: '',
+    checkbox: false
+  };
+  
   const inputCountryRef = useRef();
+  const checkboxRef = useRef();
 
   const [btnDisabled, setBtnDisabled] = useState(true);
 
   const dataFromCountryInputHandler = () => {
-    countryName = inputCountryRef.current.value;
-    if (countryName) {
+    countryData.country = inputCountryRef.current.value;
+    if (countryData.country) {
       setBtnDisabled(false);
      } else {
       setBtnDisabled(true);
@@ -19,8 +24,15 @@ const RequestData = (props) => {
 
   const clickHandler = (event) => {
     event.preventDefault();
-    props.onData(countryName);
+    countryData.checkbox = checkboxRef.current.checked;
+    props.onData(countryData);
+    clearInputs();
   };
+
+  const clearInputs = () => {
+    inputCountryRef.current.value = '';
+    setBtnDisabled(true);
+  }
 
 
   return(
@@ -28,7 +40,11 @@ const RequestData = (props) => {
       <div className="input">
          <input placeholder="Select country" type="text" ref={inputCountryRef} onChange={dataFromCountryInputHandler}></input>
       </div>
-      <Button className="input" disabled={btnDisabled} type="submit">Send</Button>
+      <div className="checkbox">
+        <input type="checkbox" disabled={btnDisabled} ref={checkboxRef}></input>
+        <span>Show more details</span>
+      </div>
+      <Button className="btn" disabled={btnDisabled} type="submit">Send</Button>
     </form>
   )
 };

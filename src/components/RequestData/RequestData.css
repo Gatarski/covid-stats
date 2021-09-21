@@ -4,6 +4,20 @@
   font-weight: bold;
 }
 
+.btn {
+  margin: 10px;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
 ::placeholder {
   text-align: center;
+}
+
+.checkbox {
+  font-family: sans-serif;
+}
+
+.checkbox:input {
+  display: inline-block;
 }
