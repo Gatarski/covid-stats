@@ -46,9 +46,15 @@ const CountryData = (props) => {
        <img className="flag" src={countryFlag} alt="flag"></img>
       </h2>
       <span>
-        <div className="data">Cases: {countryData.cases}</div>
-        <div className="data">Deaths: {countryData.deaths}</div>
-        <div className="data">Recovered: {countryData.recovered}</div>
+        <div className="data">Cases:
+          <div className="data-cases">{countryData.cases}</div>
+        </div>
+        <div className="data">Deaths:
+          <div className="data-deaths">{countryData.deaths}</div>
+        </div>
+        <div className="data">Recovered:
+          <div className="data-recovered">{countryData.recovered}</div>
+        </div>
       </span>
       <div className="data-info">Data from: https://corona.lmao.ninja/v2/</div>
       {modalMessage ? <Modal title="Error" message={`Country ${modalMessage} does not exist.`

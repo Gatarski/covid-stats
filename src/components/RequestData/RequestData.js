@@ -17,20 +17,19 @@ const RequestData = (props) => {
      }
   };
 
-  const clickHandler = () => {
+  const clickHandler = (event) => {
+    event.preventDefault();
     props.onData(countryName);
   };
 
 
   return(
-    <div>
-      <form>
-        <div className="input">
-          <input placeholder="Select country" type="text" ref={inputCountryRef} onChange={dataFromCountryInputHandler}></input>
-        </div>
-      </form>
-      <Button className="input" disabled={btnDisabled} onClick={clickHandler}>Send</Button>
-    </div>
+    <form onSubmit={clickHandler}>
+      <div className="input">
+         <input placeholder="Select country" type="text" ref={inputCountryRef} onChange={dataFromCountryInputHandler}></input>
+      </div>
+      <Button className="input" disabled={btnDisabled} type="submit">Send</Button>
+    </form>
   )
 };
 

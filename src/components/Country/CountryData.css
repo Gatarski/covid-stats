@@ -4,6 +4,25 @@
   font-weight: bold;
   text-align: center;
 }
+
+.data-cases {
+  color: red;
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.data-deaths {
+  color: black;
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.data-recovered {
+  color: green;
+  display: inline-block;
+  margin-left: 5px;
+}
+
 .data-info {
   color: gray;
   font-size: 10px;
