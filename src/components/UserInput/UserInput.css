@@ -21,3 +21,8 @@
 .checkbox:input {
   display: inline-block;
 }
+
+.error {
+  color: red;
+  font-size: 13px;
+}
