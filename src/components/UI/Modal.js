@@ -26,10 +26,10 @@ const Overlay = (props) => {
 
 const Modal = (props) => {
   return(
-    <React.Fragment>
+    <>
        {ReactDOM.createPortal(<Backdrop/>, document.getElementById('backdrop-id'))}
        {ReactDOM.createPortal(<Overlay title={props.title} message={props.message} onClick={props.onClick}/>, document.getElementById('overlay-id'))}
-     </React.Fragment>
+    </>
   )
 }
 
