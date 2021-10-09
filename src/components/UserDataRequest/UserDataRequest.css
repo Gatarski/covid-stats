@@ -4,6 +4,18 @@
   font-weight: bold;
 }
 
+.input-country {
+  margin: 5px;
+  font-family: sans-serif;
+  width: 30%;
+  height: 30px;
+  box-sizing: border-box;
+}
+
+.input-country:hover {
+  box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.1);
+}
+
 .btn {
   margin: 10px;
   font-family: sans-serif;
@@ -16,10 +28,11 @@
 
 .checkbox {
   font-family: sans-serif;
-}
-
-.checkbox:input {
   display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin: 5px;
+  box-sizing: border-box;
 }
 
 .error {

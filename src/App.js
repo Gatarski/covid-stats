@@ -1,4 +1,4 @@
-import UserInput from './components/UserInput/UserInput';
+import UserDataRequest from './components/UserDataRequest/UserDataRequest';
 import Country from './components/Country/Country';
 import covidImage from './assets/images/covid-19.png'
 import './App.css';
@@ -17,14 +17,18 @@ const App = () => {
     setIsModalOpen(false);
   };
 
+  const currentDate = () => {
+    return new Date().toISOString().slice(0, 10)
+  }
+
   return (
     <>
       <div className="image">
         <img src={covidImage} alt="covid-19"></img>
       </div>
       <div className="main-app">
-        <h2>Covid stats</h2>
-        <UserInput onData={dataFromInputsHandler}/>
+        <h2>Covid stats  ({currentDate()})</h2>
+        <UserDataRequest onData={dataFromInputsHandler}/>
         {isModalOpen && <Country value={data} onData={closeCountryData}/>}
       </div>
     </>

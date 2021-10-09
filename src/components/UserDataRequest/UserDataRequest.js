@@ -1,8 +1,8 @@
 import { useState, useRef } from 'react';
 import Button from '../UI/Button';
-import './UserInput.css'
+import './UserDataRequest.css'
 
-const UserInput = (props) => {
+const UserDataRequest = (props) => {
   const inputCountryRef = useRef();
   const checkboxRef = useRef();
 
@@ -41,21 +41,26 @@ const UserInput = (props) => {
     inputCountryRef.current.value = '';
     setBtnDisabled({btnDisabled: true, error: false});
   }
-
+  
+  const checkboxHandler = () => {
+    if (!btnDisabled.btnDisabled) {
+      checkboxRef.current.checked = !checkboxRef.current.checked;
+    };
+  }
 
   return(
     <form onSubmit={clickHandler}>
       <div className="input">
-         <input placeholder="Select country" type="text" ref={inputCountryRef} onChange={dataFromCountryInputHandler}></input>
+         <input className="input-country" placeholder="Select country" type="text" ref={inputCountryRef} onChange={dataFromCountryInputHandler}></input>
          {btnDisabled.error && <div className="error">Type at least 3 chars</div>}
       </div>
-      <div className="checkbox">
-        <input type="checkbox" disabled={btnDisabled.btnDisabled} ref={checkboxRef}></input>
-        <span>Show more detailed data</span>
+      <div>
+        <input className="checkbox" type="checkbox" disabled={btnDisabled.btnDisabled} ref={checkboxRef}></input>
+        <span onClick={checkboxHandler}>Show more detailed data</span>
       </div>
       <Button className="btn" disabled={btnDisabled.btnDisabled} type="submit">Send</Button>
     </form>
   )
 };
 
-export default UserInput;
+export default UserDataRequest;

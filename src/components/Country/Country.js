@@ -58,7 +58,13 @@ const Country = (props) => {
 
   return(
     <>
-      {!isLoading ? <CountryData country={filteredData.country} flag={countryFlag} cases={filteredData.cases} deaths={filteredData.deaths} recovered={filteredData.recovered}/> : <div className="lds-dual-ring"></div>}
+      {!isLoading ? <CountryData 
+        country={filteredData.country} 
+        flag={countryFlag} 
+        cases={filteredData.cases} 
+        deaths={filteredData.deaths} 
+        recovered={filteredData.recovered}
+        population={filteredData.population}/> : <div className="lds-dual-ring"></div>}
       {detailedData && <DetailedCountryData data={filteredData}/>}
       <div className="data-info">Data from: https://corona.lmao.ninja/v2/</div>
       {modalMessage && <Modal title="Error" message={modalMessage} onClick={clickButtonHandler}></Modal>}
