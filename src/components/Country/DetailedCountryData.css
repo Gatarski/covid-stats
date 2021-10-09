@@ -1,0 +1,17 @@
+.details-text {
+  margin-bottom: 0%;
+}
+
+.item-list {
+  display: inline-block;
+  list-style-type: none;
+  margin: 10px;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+li p {
+  display: inline-block;
+  margin: 5px;
+  font-weight: bold;
+}
