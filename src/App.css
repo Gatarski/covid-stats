@@ -1,10 +1,22 @@
 .main-app {
   text-align: center;
   border: 7px black solid;
-  margin: 15px 25%;
-  padding: 50px 0px;
+  margin: 15px 20px 15px 5%;
+  padding: 50px 20%;
   background: lightgray;
   border-radius: 10px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.global-data {
+  text-align: center;
+  border: 7px black solid;
+  margin: 15px 10px 15px 20px;
+  padding: 10px 100px;
+  background: lightgray;
+  border-radius: 10px;
+  display: inline-block;
 }
 
 .image {

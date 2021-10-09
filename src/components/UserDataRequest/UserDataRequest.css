@@ -7,9 +7,9 @@
 .input-country {
   margin: 5px;
   font-family: sans-serif;
-  width: 30%;
   height: 30px;
   box-sizing: border-box;
+  width: 250px
 }
 
 .input-country:hover {

@@ -1,12 +1,12 @@
-.details-text {
-  margin-bottom: 0%;
-}
-
 .item-list {
   display: inline-block;
   list-style-type: none;
   font-family: sans-serif;
   text-align: center;
+}
+
+h3 {
+  margin: 5px
 }
 
 li p {
