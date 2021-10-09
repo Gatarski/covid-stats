@@ -1,20 +1,21 @@
 import UserDataRequest from './components/UserDataRequest/UserDataRequest';
 import Country from './components/Country/Country';
+import GlobalData from './components/GlobalData/GlobalData';
 import covidImage from './assets/images/covid-19.png'
 import './App.css';
 import React, { useState } from 'react';
 
 const App = () => {
   const [data, setData] = useState({});
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCountryOpen, setIsCountryOpen] = useState(false);
 
   const dataFromInputsHandler = (dataFromInputs) => {
-    setIsModalOpen(true);
+    setIsCountryOpen(true);
     setData(dataFromInputs);
   };
 
   const closeCountryData = ()  => {
-    setIsModalOpen(false);
+    setIsCountryOpen(false);
   };
 
   const currentDate = () => {
@@ -29,7 +30,10 @@ const App = () => {
       <div className="main-app">
         <h2>Covid stats  ({currentDate()})</h2>
         <UserDataRequest onData={dataFromInputsHandler}/>
-        {isModalOpen && <Country value={data} onData={closeCountryData}/>}
+        {isCountryOpen && <Country value={data} onData={closeCountryData}/>}
+      </div>
+      <div className="global-data">
+       <GlobalData></GlobalData>
       </div>
     </>
   );
