@@ -9,4 +9,4 @@ Data is provided from page: https://corona.lmao.ninja/v2/countries?yesterday=&so
 to install all dependencies
 
 2. To run:
-`npm start`
+`npm start` and app will run on `localhost:3000`

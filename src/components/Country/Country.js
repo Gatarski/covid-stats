@@ -10,14 +10,13 @@ const Country = (props) => {
   const [data, setData] = useState({});
   const [modalMessage, setModalMessage] = useState('');
   const [isLoading, setIsLoading] = useState(true); 
- 
-  useEffect(() => {
-    getData();
-   }, []);
-
   let countryFlag = '';
   let filteredData = {};
   const detailedData = props.value.checkbox;
+  
+  useEffect(() => {
+    getData();
+   }, []);
  
   const getData = async () => {
     try {
