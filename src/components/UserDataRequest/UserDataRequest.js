@@ -3,7 +3,6 @@ import Button from '../UI/Button';
 import './UserDataRequest.css'
 
 const UserDataRequest = (props) => {
-  const inputCountryRef = useRef();
   const checkboxRef = useRef();
 
   const [btnDisabled, setBtnDisabled] = useState({
@@ -15,12 +14,12 @@ const UserDataRequest = (props) => {
     checkbox: false
   })
 
-  const dataFromCountryInputHandler = () => {
+  const dataFromCountryInputHandler = (event) => {
     setCountryData((prevVal) => {
-      return {...prevVal, country: inputCountryRef.current.value }
+      return {...prevVal, country: event.target.value }
     });
 
-    if (inputCountryRef.current.value.length > 2) {
+    if (event.target.value.length > 2) {
       setBtnDisabled({btnDisabled: false, error: false});
      } else {
       setBtnDisabled({btnDisabled: true, error: true});
@@ -38,20 +37,26 @@ const UserDataRequest = (props) => {
   };
 
   const clearInputs = () => {
-    inputCountryRef.current.value = '';
+    setCountryData((prevVal) => {
+      return {...prevVal, country: '' }
+    });
     setBtnDisabled({btnDisabled: true, error: false});
   }
   
-  const checkboxHandler = () => {
+  const checkboxHandler = (event) => {
     if (!btnDisabled.btnDisabled) {
       checkboxRef.current.checked = !checkboxRef.current.checked;
     };
   }
 
+  const inputCountryCSSClass = !btnDisabled.error 
+  ? 'input-country'
+  : 'input-country invalid-input'
+
   return(
     <form onSubmit={clickHandler}>
       <div className="input">
-         <input className="input-country" placeholder="Select country" type="text" ref={inputCountryRef} onChange={dataFromCountryInputHandler}></input>
+         <input className={inputCountryCSSClass} placeholder="Select country" type="text" value={countryData.country} onChange={dataFromCountryInputHandler}></input>
          {btnDisabled.error && <div className="error">Type at least 3 chars</div>}
       </div>
       <div>
