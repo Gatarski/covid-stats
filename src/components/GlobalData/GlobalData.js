@@ -34,7 +34,7 @@ const GlobalData = (props) => {
       countries.push(<li>{data.error}</li>)
     } else {
       for (let x = 0; x < 5; x++) {
-        countries.push(<li>{data[x].country}: 
+        countries.push(<li key={data[x].country}>{data[x].country}: 
                    <p>{data[x].activePerOneMillion}</p>
                  </li>)
       };
