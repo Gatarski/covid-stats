@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useState } from 'react';
 import { useEffect } from 'react/cjs/react.development';
 import Modal from '../UI/Modal';
@@ -7,7 +6,7 @@ import CountryData from './CountryData';
 import DetailedCountryData from './DetailedCountryData'
 
 const Country = (props) => {
-  const [data, setData] = useState({});
+  const [data, setData] = useState([]);
   const [modalMessage, setModalMessage] = useState('');
   const [isLoading, setIsLoading] = useState(true); 
   let countryFlag = '';
@@ -15,18 +14,14 @@ const Country = (props) => {
   const detailedData = props.value.checkbox;
   
   useEffect(() => {
-    getData();
-   }, []);
- 
-  const getData = async () => {
-    try {
-      const response = await axios.get('https://corona.lmao.ninja/v2/countries?yesterday=&sort=');
-      setData(response.data);
-    } catch(error) {
-      setModalMessage(error.message);
+    if (props.data.error) {
+      setModalMessage(props.data.error)
+    } else {
+      setData(props.data.data);
     }
     setIsLoading(false);
-   }
+   }, [props.data]);
+ 
  
   const getDataByCountry = (countryName) => {
       return data.find((item) => {
@@ -35,7 +30,7 @@ const Country = (props) => {
   };
   
   const clickButtonHandler = () => {
-    props.onData()
+    props.onClose()
   }
 
   const filterData = () => {
@@ -49,12 +44,10 @@ const Country = (props) => {
     }
   }
 
-  try {
+  if (data.length) {
     filterData()
-  } catch(e) {
-    console.log('There is nothing to filter')
   }
-
+ 
   return(
     <>
       {!isLoading ? <CountryData 

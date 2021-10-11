@@ -6,12 +6,13 @@ import './App.css';
 import React, { useState } from 'react';
 
 const App = () => {
-  const [data, setData] = useState({});
+  const [inputData, setInputData] = useState({});
   const [isCountryOpen, setIsCountryOpen] = useState(false);
+  const [data, setData] = useState([]);
 
   const dataFromInputsHandler = (dataFromInputs) => {
     setIsCountryOpen(true);
-    setData(dataFromInputs);
+    setInputData(dataFromInputs);
   };
 
   const closeCountryData = ()  => {
@@ -22,6 +23,10 @@ const App = () => {
     return new Date().toISOString().slice(0, 10)
   }
 
+  const getDataFromURL = (data) => {
+   setData(data);
+  }
+
   return (
     <>
       <div className="image">
@@ -30,10 +35,10 @@ const App = () => {
       <div className="main-app">
         <h2>Covid stats  ({currentDate()})</h2>
         <UserDataRequest onData={dataFromInputsHandler}/>
-        {isCountryOpen && <Country value={data} onData={closeCountryData}/>}
+        {isCountryOpen && <Country value={inputData} onClose={closeCountryData} data={data}/>}
       </div>
       <div className="global-data">
-       <GlobalData></GlobalData>
+       <GlobalData onGetData={getDataFromURL}></GlobalData>
       </div>
     </>
   );
