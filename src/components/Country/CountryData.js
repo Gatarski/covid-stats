@@ -1,3 +1,5 @@
+import './CountryData.css'
+
 const CountryData = (props) => {
   const countryPopulation = () => {
     return `${(props.population / 1000000).toFixed(2)} mln`

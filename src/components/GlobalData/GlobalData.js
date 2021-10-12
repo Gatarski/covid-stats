@@ -1,9 +1,12 @@
 import axios from 'axios';
 import React from 'react';
+import ReactTooltip from "react-tooltip";
+import tooltipIcon from '../../assets/icons/tooltip.png'
 import { useEffect, useState } from 'react/cjs/react.development';
 import './GlobalData.css'
 
 const GlobalData = (props) => {
+  const tooltipInfo = 'Top countires (population over 0.5 mln) with active cases per one million'
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true); 
   useEffect(() => {
@@ -44,10 +47,10 @@ const GlobalData = (props) => {
 
   return(
     <>
-      <h2>Global Data</h2>
-      <h3>Top countries (population</h3>
-      <h3> over 0.5 mln) with active</h3>
-      <h3>cases per one million:</h3>
+      <h2 data-tip data-for="countryTooltip">Global Data
+       <img className="tooltip-icon" src={tooltipIcon} alt="tooltip"></img>
+      </h2>
+      <ReactTooltip className="tooltip" id="countryTooltip" place="top" effect="solid">{tooltipInfo}</ReactTooltip>
       {!isLoading ? <ul className='item-list'>
         {topFiveCountries()}
       </ul> : <div className="lds-dual-ring"></div>}

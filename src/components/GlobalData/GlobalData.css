@@ -2,11 +2,7 @@
   display: inline-block;
   list-style-type: none;
   font-family: sans-serif;
-  text-align: center;
-}
-
-h3 {
-  margin: 5px
+  text-align: left;
 }
 
 li p {
@@ -14,3 +10,20 @@ li p {
   margin: 5px;
   font-weight: bold;
 }
+
+.tooltip-icon {
+  width: 20px;
+  height: 20px;
+  margin-left: 5px;
+}
+
+.tooltip {
+  font-size: 15px !important;
+  pointer-events: auto !important;
+  max-width: 200px;
+}
+
+.tooltip:hover {
+  visibility: visible !important;
+  opacity: 1 !important;
+} 
