@@ -2,7 +2,6 @@ import React from 'react';
 import './Dropdown.css'
 
 const Dropdown = (props) => {
-  console.log('dropdpown')
   const clickItemHandler = (event) => {
     props.onCountryName(event.target.textContent)
   }
