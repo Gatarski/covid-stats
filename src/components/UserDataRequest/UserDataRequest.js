@@ -1,5 +1,6 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import Button from '../UI/Button';
+import Dropdown from '../UI/Dropdown';
 import './UserDataRequest.css'
 
 const UserDataRequest = (props) => {
@@ -13,16 +14,19 @@ const UserDataRequest = (props) => {
     country: '',
     checkbox: false
   })
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
   const dataFromCountryInputHandler = (event) => {
     setCountryData((prevVal) => {
       return {...prevVal, country: event.target.value }
     });
 
-    if (event.target.value.length > 2) {
+    if (event.target.value.length > 1) {
       setBtnDisabled({btnDisabled: false, error: false});
+      setIsDropdownOpen(true);
      } else {
       setBtnDisabled({btnDisabled: true, error: true});
+      setIsDropdownOpen(false);
      }
   };
 
@@ -41,13 +45,21 @@ const UserDataRequest = (props) => {
       return {...prevVal, country: '' }
     });
     setBtnDisabled({btnDisabled: true, error: false});
+    setIsDropdownOpen(false);
   }
   
-  const checkboxHandler = (event) => {
+  const checkboxHandler = () => {
     if (!btnDisabled.btnDisabled) {
       checkboxRef.current.checked = !checkboxRef.current.checked;
     };
   }
+
+  const countryNameFromDropdown = useCallback((countryName) => {
+    setCountryData((prevVal) => {
+      return {...prevVal, country: countryName }
+    });
+    setIsDropdownOpen(false);
+  }, [])
 
   const inputCountryCSSClass = !btnDisabled.error 
   ? 'input-country'
@@ -57,7 +69,8 @@ const UserDataRequest = (props) => {
     <form onSubmit={clickHandler}>
       <div className="input">
          <input className={inputCountryCSSClass} placeholder="Select country" type="text" value={countryData.country} onChange={dataFromCountryInputHandler}></input>
-         {btnDisabled.error && <div className="error">Type at least 3 chars</div>}
+         {btnDisabled.error && <div className="error">Type at least 2 chars</div>}
+         {isDropdownOpen && <Dropdown data={props.data} userInput={countryData.country} onCountryName={countryNameFromDropdown}></Dropdown>}
       </div>
       <div>
         <input className="checkbox" type="checkbox" disabled={btnDisabled.btnDisabled} ref={checkboxRef}></input>

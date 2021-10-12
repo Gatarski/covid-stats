@@ -34,7 +34,7 @@ const App = () => {
       </div>
       <div className="main-app">
         <h2>Covid stats  ({currentDate()})</h2>
-        <UserDataRequest onData={dataFromInputsHandler}/>
+        <UserDataRequest onData={dataFromInputsHandler} data={data}/>
         {isCountryOpen && <Country value={inputData} onClose={closeCountryData} data={data}/>}
       </div>
       <div className="global-data">
