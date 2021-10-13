@@ -10,7 +10,7 @@ const Dropdown = (props) => {
 });
   const sortedData = countries.sort();
   const filteredCountries = sortedData.map((country) => {
-    if (country.includes(props.userInput)) {
+    if (country.toLowerCase().trim().includes(props.userInput.toLowerCase().trim())) {
       const countryName = country;
       return <li onClick={clickItemHandler} className='list-item' key={country}>{countryName}</li>
     }
