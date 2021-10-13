@@ -4,6 +4,7 @@ import ReactTooltip from "react-tooltip";
 import tooltipIcon from '../../assets/icons/tooltip.png'
 import { useEffect, useState } from 'react/cjs/react.development';
 import './GlobalData.css'
+import GlobalDataSingleItem from './GlobalDataSingleItem';
 
 const GlobalData = (props) => {
   const tooltipInfo = 'Top countires (population over 0.5 mln) with active cases per one million'
@@ -36,10 +37,9 @@ const GlobalData = (props) => {
     if (data.error) {
       countries.push(<li>{data.error}</li>)
     } else {
-      for (let x = 0; x < 5; x++) {
-        countries.push(<li key={data[x].country}>{data[x].country}: 
-                   <p>{data[x].activePerOneMillion}</p>
-                 </li>)
+      for (let x = 0; x < 10; x++) {
+        countries.push(
+          <GlobalDataSingleItem country={data[x].country} activePerOneMillion={data[x].activePerOneMillion}/>)
       };
     }
     return countries
