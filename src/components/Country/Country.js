@@ -5,21 +5,19 @@ import './Country.css'
 import CountryData from './CountryData';
 import DetailedCountryData from './DetailedCountryData'
 
+
 const Country = (props) => {
-  const [data, setData] = useState([]);
+  const data = props.data.data;
+  const sourceDataMessage = props.data.mockedData ? 'dummy data.' : 'https://corona.lmao.ninja/v2/'
   const [modalMessage, setModalMessage] = useState('');
-  const [isLoading, setIsLoading] = useState(true); 
   let countryFlag = '';
   let filteredData = {};
   const detailedData = props.value.checkbox;
-  
+
   useEffect(() => {
     if (props.data.error) {
       setModalMessage(props.data.error)
-    } else {
-      setData(props.data.data);
     }
-    setIsLoading(false);
    }, [props.data]);
  
  
@@ -44,24 +42,21 @@ const Country = (props) => {
     }
   }
 
-  if (data.length) {
-    filterData()
-  }
- 
+  filterData();
   return(
     <>
-      {!isLoading ? <CountryData 
+      <CountryData 
         country={filteredData.country} 
         flag={countryFlag} 
         cases={filteredData.cases} 
         deaths={filteredData.deaths} 
         recovered={filteredData.recovered}
-        population={filteredData.population}/> : <div className="lds-dual-ring"></div>}
+        population={filteredData.population}/>
       {detailedData && <DetailedCountryData data={filteredData}/>}
-      <div className="data-info">Data from: https://corona.lmao.ninja/v2/</div>
+      <div className="data-info">Data from: {sourceDataMessage}</div>
       {modalMessage && <Modal title="Error" message={modalMessage} onClick={clickButtonHandler}></Modal>}
     </>
   )
 };
 
-export default Country;
+export default React.memo(Country);

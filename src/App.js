@@ -8,14 +8,14 @@ import React, { useState } from 'react';
 const App = () => {
   const [inputData, setInputData] = useState({});
   const [isCountryOpen, setIsCountryOpen] = useState(false);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({data: []});
 
   const dataFromInputsHandler = (dataFromInputs) => {
     setIsCountryOpen(true);
     setInputData(dataFromInputs);
   };
 
-  const closeCountryData = ()  => {
+  const closeCountryData = () => {
     setIsCountryOpen(false);
   };
 

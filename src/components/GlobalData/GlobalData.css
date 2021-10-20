@@ -27,3 +27,10 @@ li p {
   visibility: visible !important;
   opacity: 1 !important;
 } 
+
+.error {
+  font-size: 15px;
+  color: red;
+  max-width: 170px;
+  font-weight: bold;
+}

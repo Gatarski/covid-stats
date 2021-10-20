@@ -5,29 +5,35 @@ import tooltipIcon from '../../assets/icons/tooltip.png'
 import { useEffect, useState } from 'react/cjs/react.development';
 import './GlobalData.css'
 import GlobalDataSingleItem from './GlobalDataSingleItem';
+import MOCKED_DATA from '../../MOCKED_DATA';
 
 const GlobalData = (props) => {
+  const countiresToDisplay = 5;
   const tooltipInfo = 'Top countires (population over 0.5 mln) with active cases per one million'
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true); 
+  const [isMockedData, setIsMockedData] = useState(false);
   useEffect(() => {
     getData();
    }, []);
 
+  const filterData = (data) => {
+    props.onGetData(data);
+    const filteredData = data.data.sort((a, b) => {
+      return b.activePerOneMillion - a.activePerOneMillion;
+    })
+    const filteredDataByPopulation = filteredData.filter((value) => {
+      return value.population > 500000
+    })
+    setData(filteredDataByPopulation);
+  }
   const getData = async () => {
       try {
         const response = await axios.get('https://corona.lmao.ninja/v2/countries?yesterday=&sort=');
-        props.onGetData(response);
-        const filteredData = response.data.sort((a, b) => {
-          return b.activePerOneMillion - a.activePerOneMillion;
-        })
-        const filteredDataByPopulation = filteredData.filter((value) => {
-          return value.population > 500000
-        })
-        setData(filteredDataByPopulation);
+        filterData(response)
     } catch(error) {
-      setData({error: error.message})
-      props.onGetData({error: error.message});
+      filterData(MOCKED_DATA)
+      setIsMockedData(true);
     }
       setIsLoading(false);
   }
@@ -37,9 +43,9 @@ const GlobalData = (props) => {
     if (data.error) {
       countries.push(<li>{data.error}</li>)
     } else {
-      for (let x = 0; x < 10; x++) {
+      for (let x = 0; x < countiresToDisplay; x++) {
         countries.push(
-          <GlobalDataSingleItem country={data[x].country} activePerOneMillion={data[x].activePerOneMillion}/>)
+          <GlobalDataSingleItem key={data[x].country} country={data[x].country} activePerOneMillion={data[x].activePerOneMillion}/>)
       };
     }
     return countries
@@ -51,6 +57,7 @@ const GlobalData = (props) => {
        <img className="tooltip-icon" src={tooltipIcon} alt="tooltip"></img>
       </h2>
       <ReactTooltip className="tooltip" id="countryTooltip" place="top" effect="solid">{tooltipInfo}</ReactTooltip>
+      {isMockedData && <div className="error">Something went wrong. Mocked data provided.</div>}
       {!isLoading ? <ul className='item-list'>
         {topFiveCountries()}
       </ul> : <div className="lds-dual-ring"></div>}
