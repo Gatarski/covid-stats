@@ -21,7 +21,7 @@ const UserDataRequest = (props) => {
       return {...prevVal, country: event.target.value }
     });
 
-    if (event.target.value.length > 1) {
+    if (event.target.value.length > 1 && props.data.data.length) {
       setBtnDisabled({btnDisabled: false, error: false});
       setIsDropdownOpen(true);
      } else {
