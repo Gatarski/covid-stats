@@ -29,8 +29,8 @@ const UserDataRequest = (props) => {
       setIsDropdownOpen(false);
      }
   };
-  const getCheckboxHandler = (event) => {
-    setIsChecked(event)
+  const getCheckboxHandler = () => {
+    setIsChecked(!isChecked)
   }
   const clickHandler = (event) => {
     event.preventDefault();
@@ -63,15 +63,15 @@ const UserDataRequest = (props) => {
 
   return(
     <form onSubmit={clickHandler}>
-      <div className="input">
-         <input className={inputCountryCSSClass} placeholder="Select country" type="text" value={countryData.country} onChange={dataFromCountryInputHandler}></input>
-         {btnDisabled.error && <div className="error">Type at least 2 chars</div>}
+      <div className='input'>
+         <input className={inputCountryCSSClass} placeholder='Select country' type='text' value={countryData.country} onChange={dataFromCountryInputHandler}></input>
+         {btnDisabled.error && <div className='error'>Type at least 2 chars</div>}
          {isDropdownOpen && <Dropdown data={props.data} userInput={countryData.country} onCountryName={countryNameFromDropdown}></Dropdown>}
       </div>
       <div>
         <Checkbox disabled={btnDisabled.btnDisabled} onCheckboxData={getCheckboxHandler} message='Show more detailed data'></Checkbox>
       </div>
-      <Button className="btn" disabled={btnDisabled.btnDisabled} type="submit">Send</Button>
+      <Button className='btn' disabled={btnDisabled.btnDisabled} type='submit'>Send</Button>
     </form>
   )
 };

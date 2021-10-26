@@ -29,15 +29,15 @@ const App = () => {
 
   return (
     <>
-      <div className="image">
-        <img src={covidImage} alt="covid-19"></img>
+      <div className='image'>
+        <img src={covidImage} alt='covid-19'></img>
       </div>
-      <div className="main-app">
+      <div className='main-app'>
         <h2>Covid stats  ({currentDate()})</h2>
         <UserDataRequest onData={dataFromInputsHandler} data={data}/>
         {isCountryOpen && <Country value={inputData} onClose={closeCountryData} data={data}/>}
       </div>
-      <div className="global-data">
+      <div className='global-data'>
        <GlobalData onGetData={getDataFromURL}></GlobalData>
       </div>
     </>

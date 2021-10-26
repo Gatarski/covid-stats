@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React from 'react';
-import ReactTooltip from "react-tooltip";
+import ReactTooltip from 'react-tooltip';
 import tooltipIcon from '../../assets/icons/tooltip.png'
 import { useEffect, useState } from 'react/cjs/react.development';
 import './GlobalData.css'
@@ -15,7 +15,7 @@ const GlobalData = (props) => {
   const [originalData, setOriginalData] = useState([])
   const [isLoading, setIsLoading] = useState(true); 
   const [isMockedData, setIsMockedData] = useState(false);
-  const [isChecked, setIsChecked] = useState(false);
+ 
   useEffect(() => {
     getData();
    }, []);
@@ -28,7 +28,7 @@ const GlobalData = (props) => {
     const filteredDataByPopulation = filteredData.filter((value) => {
       return value.population > 500000
     })
-    setData(!isChecked ? filteredDataByPopulation : originalData.data);
+    setData(filteredDataByPopulation);
   }
   const getData = async () => {
       try {
@@ -50,23 +50,25 @@ const GlobalData = (props) => {
     return countries
   }
   const checkboxHandler = (event) => {
-     setIsChecked(event)
-     filterData(originalData)
+    const filteredData = originalData.data.sort((a, b) => {
+      return b.activePerOneMillion - a.activePerOneMillion;
+    })
+     !event ? setData(filteredData) : filterData(originalData);
   }
 
   return(
     <>
-      <h2 data-tip data-for="countryTooltip">Global Data
-       <img className="tooltip-icon" src={tooltipIcon} alt="tooltip"></img>
+      <h2 data-tip data-for='countryTooltip'>Global Data
+       <img className='tooltip-icon' src={tooltipIcon} alt='tooltip'></img>
       </h2>
-      <ReactTooltip className="tooltip" id="countryTooltip" place="top" effect="solid">{tooltipInfo}</ReactTooltip>
+      <ReactTooltip className='tooltip' id='countryTooltip' place='top' effect='solid'>{tooltipInfo}</ReactTooltip>
       <div>
-         <Checkbox disabled={isLoading} onCheckboxData={checkboxHandler} message="Include small countries"></Checkbox>
+         <Checkbox disabled={isLoading} onCheckboxData={checkboxHandler} message='Include small countries'></Checkbox>
       </div>
-      {isMockedData && <div className="error">Something went wrong. Mocked data provided.</div>}
+      {isMockedData && <div className='error'>Something went wrong. Mocked data provided.</div>}
       {!isLoading ? <ul className='item-list'>
         {topCountries()}
-      </ul> : <div className="lds-dual-ring"></div>}
+      </ul> : <div className='lds-dual-ring'></div>}
     </>
   )
 }

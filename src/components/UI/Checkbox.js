@@ -1,11 +1,16 @@
+import { useState } from 'react/cjs/react.development'
+import './Checkbox.css'
+
 const Checkbox = (props) => {
-  const checkboxHandler = (event) => {
-    props.onCheckboxData(event.target.checked)
+  const [isChecked, setIsChecked] = useState(false)
+  const checkboxHandler = () => {
+    setIsChecked(!isChecked)
+    props.onCheckboxData(isChecked)
   }
  
  return(
-   <span>
-    <input onClick={checkboxHandler} className="checkbox" type="checkbox" disabled={props.disabled}></input>
+   <span onClick={checkboxHandler}>
+    <input checked={isChecked} className='checkbox' type='checkbox' disabled={props.disabled}></input>
     {props.message}
   </span>
    
