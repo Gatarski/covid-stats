@@ -13,11 +13,15 @@ const GlobalData = (props) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true); 
   const [isMockedData, setIsMockedData] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+  const [originalData, setOriginalData] = useState([]);
+  
   useEffect(() => {
     getData();
    }, []);
 
   const filterData = (data) => {
+    console.log(data)
     props.onGetData(data);
     const filteredData = data.data.sort((a, b) => {
       return b.activePerOneMillion - a.activePerOneMillion;
@@ -30,8 +34,10 @@ const GlobalData = (props) => {
   const getData = async () => {
       try {
         const response = await axios.get('https://corona.lmao.ninja/v2/countries?yesterday=&sort=');
+        setOriginalData(response)
         filterData(response)
     } catch(error) {
+      setOriginalData(MOCKED_DATA)
       filterData(MOCKED_DATA)
       setIsMockedData(true);
     }
@@ -50,6 +56,15 @@ const GlobalData = (props) => {
     }
     return countries
   }
+  const checkboxHandler = () => {
+    if (!isLoading) {
+      setIsChecked(!isChecked)
+      const filteredData = originalData.data.sort((a, b) => {
+        return b.activePerOneMillion - a.activePerOneMillion;
+      })
+      !isChecked ? setData(filteredData) : filterData(originalData)
+    };
+  }
 
   return(
     <>
@@ -57,6 +72,10 @@ const GlobalData = (props) => {
        <img className="tooltip-icon" src={tooltipIcon} alt="tooltip"></img>
       </h2>
       <ReactTooltip className="tooltip" id="countryTooltip" place="top" effect="solid">{tooltipInfo}</ReactTooltip>
+      <div>
+        <input checked={isChecked} onClick={checkboxHandler} className="checkbox" type="checkbox" disabled={isLoading}></input>
+        <span onClick={checkboxHandler}>Include small country</span>
+      </div>
       {isMockedData && <div className="error">Something went wrong. Mocked data provided.</div>}
       {!isLoading ? <ul className='item-list'>
         {topFiveCountries()}

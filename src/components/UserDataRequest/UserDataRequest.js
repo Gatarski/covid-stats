@@ -49,6 +49,7 @@ const UserDataRequest = (props) => {
   }
   
   const checkboxHandler = () => {
+    console.log('event')
     if (!btnDisabled.btnDisabled) {
       checkboxRef.current.checked = !checkboxRef.current.checked;
     };
