@@ -1,11 +1,10 @@
-import { useState, useRef, useCallback } from 'react';
+import React, { useState } from 'react';
 import Button from '../UI/Button';
+import Checkbox from '../UI/Checkbox';
 import Dropdown from '../UI/Dropdown';
 import './UserDataRequest.css'
 
 const UserDataRequest = (props) => {
-  const checkboxRef = useRef();
-
   const [btnDisabled, setBtnDisabled] = useState({
     btnDisabled: true,
     error: false
@@ -14,6 +13,7 @@ const UserDataRequest = (props) => {
     country: '',
     checkbox: false
   })
+  const [isChecked, setIsChecked] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
   const dataFromCountryInputHandler = (event) => {
@@ -29,12 +29,14 @@ const UserDataRequest = (props) => {
       setIsDropdownOpen(false);
      }
   };
-
+  const getCheckboxHandler = (event) => {
+    setIsChecked(event)
+  }
   const clickHandler = (event) => {
     event.preventDefault();
-    countryData.checkbox = checkboxRef.current.checked;
+    countryData.checkbox = isChecked;
     setCountryData((prevVal) => {
-      return {...prevVal, checkbox: checkboxRef.current.checked }
+      return {...prevVal, checkbox: isChecked }
     });
     props.onData(countryData);
     clearInputs();
@@ -47,19 +49,13 @@ const UserDataRequest = (props) => {
     setBtnDisabled({btnDisabled: true, error: false});
     setIsDropdownOpen(false);
   }
-  
-  const checkboxHandler = () => {
-    if (!btnDisabled.btnDisabled) {
-      checkboxRef.current.checked = !checkboxRef.current.checked;
-    };
-  }
 
-  const countryNameFromDropdown = useCallback((countryName) => {
+  const countryNameFromDropdown = (countryName) => {
     setCountryData((prevVal) => {
       return {...prevVal, country: countryName }
     });
     setIsDropdownOpen(false);
-  }, [])
+  }
 
   const inputCountryCSSClass = !btnDisabled.error 
   ? 'input-country'
@@ -73,8 +69,7 @@ const UserDataRequest = (props) => {
          {isDropdownOpen && <Dropdown data={props.data} userInput={countryData.country} onCountryName={countryNameFromDropdown}></Dropdown>}
       </div>
       <div>
-        <input className="checkbox" type="checkbox" disabled={btnDisabled.btnDisabled} ref={checkboxRef}></input>
-        <span onClick={checkboxHandler}>Show more detailed data</span>
+        <Checkbox disabled={btnDisabled.btnDisabled} onCheckboxData={getCheckboxHandler} message='Show more detailed data'></Checkbox>
       </div>
       <Button className="btn" disabled={btnDisabled.btnDisabled} type="submit">Send</Button>
     </form>

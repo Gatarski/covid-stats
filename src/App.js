@@ -3,7 +3,7 @@ import Country from './components/Country/Country';
 import GlobalData from './components/GlobalData/GlobalData';
 import covidImage from './assets/images/covid-19.png'
 import './App.css';
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 
 const App = () => {
   const [inputData, setInputData] = useState({});
@@ -23,9 +23,9 @@ const App = () => {
     return new Date().toISOString().slice(0, 10)
   }
 
-  const getDataFromURL = (data) => {
+  const getDataFromURL = useCallback((data) => {
    setData(data);
-  }
+  }, [])
 
   return (
     <>
