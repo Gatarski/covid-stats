@@ -1,0 +1,8 @@
+.checkbox {
+  font-family: sans-serif;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin: 5px;
+  box-sizing: border-box;
+}

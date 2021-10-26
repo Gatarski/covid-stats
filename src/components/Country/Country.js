@@ -53,8 +53,8 @@ const Country = (props) => {
         recovered={filteredData.recovered}
         population={filteredData.population}/>
       {detailedData && <DetailedCountryData data={filteredData}/>}
-      <div className="data-info">Data from: {sourceDataMessage}</div>
-      {modalMessage && <Modal title="Error" message={modalMessage} onClick={clickButtonHandler}></Modal>}
+      <div className='data-info'>Data from: {sourceDataMessage}</div>
+      {modalMessage && <Modal title='Error' message={modalMessage} onClick={clickButtonHandler}></Modal>}
     </>
   )
 };

@@ -3,7 +3,7 @@ import Country from './components/Country/Country';
 import GlobalData from './components/GlobalData/GlobalData';
 import covidImage from './assets/images/covid-19.png'
 import './App.css';
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 
 const App = () => {
   const [inputData, setInputData] = useState({});
@@ -23,21 +23,21 @@ const App = () => {
     return new Date().toISOString().slice(0, 10)
   }
 
-  const getDataFromURL = (data) => {
+  const getDataFromURL = useCallback((data) => {
    setData(data);
-  }
+  }, [])
 
   return (
     <>
-      <div className="image">
-        <img src={covidImage} alt="covid-19"></img>
+      <div className='image'>
+        <img src={covidImage} alt='covid-19'></img>
       </div>
-      <div className="main-app">
+      <div className='main-app'>
         <h2>Covid stats  ({currentDate()})</h2>
         <UserDataRequest onData={dataFromInputsHandler} data={data}/>
         {isCountryOpen && <Country value={inputData} onClose={closeCountryData} data={data}/>}
       </div>
-      <div className="global-data">
+      <div className='global-data'>
        <GlobalData onGetData={getDataFromURL}></GlobalData>
       </div>
     </>
