@@ -63,7 +63,7 @@ const GlobalData = (props) => {
       </h2>
       <ReactTooltip className='tooltip' id='countryTooltip' place='top' effect='solid'>{tooltipInfo}</ReactTooltip>
       <div>
-         <Checkbox disabled={isLoading} onCheckboxData={checkboxHandler} message='Include small countries'></Checkbox>
+         <Checkbox disabled={isLoading || isMockedData} onCheckboxData={checkboxHandler} message='Include small countries'></Checkbox>
       </div>
       {isMockedData && <div className='error'>Something went wrong. Mocked data provided.</div>}
       {!isLoading ? <ul className='item-list'>
