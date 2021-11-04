@@ -4,8 +4,10 @@ import './Checkbox.css'
 const Checkbox = (props) => {
   const [isChecked, setIsChecked] = useState(false)
   const checkboxHandler = () => {
-    setIsChecked(!isChecked)
-    props.onCheckboxData(isChecked)
+    if (!props.disabled) {
+      setIsChecked(!isChecked)
+      props.onCheckboxData(isChecked)
+    }
   }
  
  return(

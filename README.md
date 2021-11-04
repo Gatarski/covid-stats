@@ -10,3 +10,9 @@ to install all dependencies
 
 2. To run:
 `npm start` and app will run on `localhost:3000`
+
+## Cypress (e2e):
+
+1. Run application
+
+2. `npm run e2e` to launch tests in headless.
