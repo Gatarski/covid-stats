@@ -1,7 +1,12 @@
 import './DetailedCountryData.css'
+import { ResponseDataProp } from '../../interfaces';
 
-const DetailedCountryData = (props) => {
-  const percentOfCountryPopulation = (number) => {
+interface Props {
+  data: ResponseDataProp
+}
+
+const DetailedCountryData = (props: Props) => {
+  const percentOfCountryPopulation = (number: number) => {
     return `${(number / props.data.population).toFixed(4)} %`
   };
 

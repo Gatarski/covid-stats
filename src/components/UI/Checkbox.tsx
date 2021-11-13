@@ -1,7 +1,13 @@
-import { useState } from 'react/cjs/react.development'
+import { useState } from 'react'
 import './Checkbox.css'
 
-const Checkbox = (props) => {
+interface Props {
+  disabled: boolean,
+  message: string,
+  onCheckboxData: Function
+}
+
+const Checkbox = (props: Props) => {
   const [isChecked, setIsChecked] = useState(false)
   const checkboxHandler = () => {
     if (!props.disabled) {

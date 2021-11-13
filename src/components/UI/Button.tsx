@@ -1,7 +1,15 @@
 import React from 'react';
 import './Button.css'
 
-const Button = (props) => {
+interface Props {
+  type?: any,
+  onClick?: any,
+  disabled?: boolean,
+  children?: any,
+  className?: string,
+}
+
+const Button = (props: Props) => {
   const classes = `${props.className} button`
 
   return (

@@ -1,5 +1,5 @@
 # covid-stats
-This is simple app in React.js with covid data.
+This is simple app in React.jsx with covid data.
 
 Data is provided from page: https://corona.lmao.ninja/v2/countries?yesterday=&sort=
 

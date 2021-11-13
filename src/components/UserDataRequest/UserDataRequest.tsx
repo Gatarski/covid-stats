@@ -1,22 +1,28 @@
-import React, { useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import Button from '../UI/Button';
 import Checkbox from '../UI/Checkbox';
 import Dropdown from '../UI/Dropdown';
 import './UserDataRequest.css'
+import { CountryData, ResponeData } from '../../interfaces';
 
-const UserDataRequest = (props) => {
+interface Props {
+  data: ResponeData,
+  onData: Function
+}
+
+const UserDataRequest = (props: Props) => {
   const [btnDisabled, setBtnDisabled] = useState({
     btnDisabled: true,
     error: false
   });
-  const [countryData, setCountryData] = useState({
+  const [countryData, setCountryData] = useState<CountryData>({
     country: '',
-    checkbox: false
+    checkbox: false,
   })
   const [isChecked, setIsChecked] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
-  const dataFromCountryInputHandler = (event) => {
+  const dataFromCountryInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setCountryData((prevVal) => {
       return {...prevVal, country: event.target.value }
     });
@@ -32,7 +38,7 @@ const UserDataRequest = (props) => {
   const getCheckboxHandler = () => {
     setIsChecked(!isChecked)
   }
-  const clickHandler = (event) => {
+  const clickHandler = (event: FormEvent) => {
     event.preventDefault();
     countryData.checkbox = isChecked;
     setCountryData((prevVal) => {
@@ -50,7 +56,7 @@ const UserDataRequest = (props) => {
     setIsDropdownOpen(false);
   }
 
-  const countryNameFromDropdown = (countryName) => {
+  const countryNameFromDropdown = (countryName: string) => {
     setCountryData((prevVal) => {
       return {...prevVal, country: countryName }
     });
