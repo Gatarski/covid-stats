@@ -3,14 +3,14 @@ import Country from './components/Country/Country';
 import GlobalData from './components/GlobalData/GlobalData';
 import covidImage from './assets/images/covid-19.png'
 import './App.css';
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 
 const App = () => {
-  const [inputData, setInputData] = useState({});
+  const [inputData, setInputData] = useState<any>({});
   const [isCountryOpen, setIsCountryOpen] = useState(false);
-  const [data, setData] = useState({data: []});
+  const [data, setData] = useState<any>({data: []});
 
-  const dataFromInputsHandler = (dataFromInputs) => {
+  const dataFromInputsHandler = (dataFromInputs: string) => {
     setIsCountryOpen(true);
     setInputData(dataFromInputs);
   };

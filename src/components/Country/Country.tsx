@@ -1,17 +1,31 @@
 import React, { useState } from 'react';
-import { useEffect } from 'react/cjs/react.development';
+import { useEffect } from 'react';
 import Modal from '../UI/Modal';
 import './Country.css'
 import CountryData from './CountryData';
 import DetailedCountryData from './DetailedCountryData'
+import { ResponseDataProp, MockedData } from '../../interfaces';
 
+interface Props {
+  data: {
+    data: ResponseDataProp,
+    mockedData: MockedData,
+    error: string
+  },
+  value: {
+    checkbox: boolean,
+    country: string
+  },
+  onClose: Function
 
-const Country = (props) => {
-  const data = props.data.data;
+}
+
+const Country = (props: Props) => {
+  const data: any = props.data.data;
   const sourceDataMessage = props.data.mockedData ? 'dummy data.' : 'https://corona.lmao.ninja/v2/'
   const [modalMessage, setModalMessage] = useState('');
   let countryFlag = '';
-  let filteredData = {};
+  let filteredData: ResponseDataProp = {} as any;
   const detailedData = props.value.checkbox;
 
   useEffect(() => {
@@ -21,8 +35,8 @@ const Country = (props) => {
    }, [props.data]);
  
  
-  const getDataByCountry = (countryName) => {
-      return data.find((item) => {
+  const getDataByCountry = (countryName: string): ResponseDataProp => {
+      return data.find((item: ResponseDataProp) => {
         return item.country === countryName;
       });
   };

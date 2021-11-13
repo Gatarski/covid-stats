@@ -1,8 +1,10 @@
-const MOCKED_DATA = { 
+import { MockedData } from './interfaces';
+
+const MOCKED_DATA: MockedData = { 
 	mockedData: true,
 	data: [{
 	country: 'Poland',
-	countryInfo: { info: ''},
+	countryInfo: { info: '', flag: ''},
 	cases: 2945056,
 	deaths: 76179,
 	recovered: 2678296,
@@ -18,7 +20,7 @@ const MOCKED_DATA = {
 	},
 	 {
 	country: 'USA',
-	countryInfo: { info: ''},
+	countryInfo: { info: '', flag: ''},
 	cases: 45917384,
 	deaths: 746584,
 	recovered: 35586030,
@@ -34,7 +36,7 @@ const MOCKED_DATA = {
 	},
 	{
 	country: 'India',
-	countryInfo: { info: ''},
+	countryInfo: { info: '', flag: ''},
 	cases: 34108284,
 	deaths: 452679,
 	recovered: 33470265,
@@ -50,7 +52,7 @@ const MOCKED_DATA = {
 	},
 	{
 	country: 'Brazil',
-	countryInfo: { info: ''},
+	countryInfo: { info: '', flag: ''},
 	cases: 21651910,
 	deaths: 603521,
 	recovered: 20813408,
@@ -66,7 +68,7 @@ const MOCKED_DATA = {
 	},
 	{
 	country: 'Russia',
-	countryInfo: { info: ''},
+	countryInfo: { info: '', flag: ''},
 	cases: 8060752,
 	deaths: 225325,
 	recovered: 23426,
@@ -82,7 +84,7 @@ const MOCKED_DATA = {
 	},
 	{
 	country: 'Turkey',
-	countryInfo: { info: ''},
+	countryInfo: { info: '', flag: ''},
 	cases: 30862,
 	deaths: 68060,
 	recovered: 7143657,
@@ -98,7 +100,7 @@ const MOCKED_DATA = {
 	},
 	{
 	country: 'Spain',
-	countryInfo: { info: ''},
+	countryInfo: { info: '', flag: ''},
 	cases: 4990767,
 	deaths: 87051,
 	recovered: 4842516,
@@ -114,7 +116,7 @@ const MOCKED_DATA = {
 	},
 	{
 	country: 'Croatia',
-	countryInfo: { info: ''},
+	countryInfo: { info: '', flag: ''},
 	cases: 429974,
 	deaths: 8928,
 	recovered: 411152,
@@ -130,7 +132,7 @@ const MOCKED_DATA = {
 	},
 	{
 	country: 'Italy',
-	countryInfo: { info: ''},
+	countryInfo: { info: '', flag: ''},
 	cases: 4722188,
 	deaths: 131655,
 	recovered: 4515987,
@@ -146,7 +148,7 @@ const MOCKED_DATA = {
 	},
 	{
 	country: 'France',
-	countryInfo: { info: ''},
+	countryInfo: { info: '', flag: ''},
 	cases: 7090109,
 	deaths: 117306,
 	recovered: 6890922,
@@ -162,7 +164,7 @@ const MOCKED_DATA = {
 	},
 	{
 	country: 'Peru',
-	countryInfo: { info: ''},
+	countryInfo: { info: '', flag: ''},
 	cases: 2190396,
 	deaths: 199882,
 	recovered: 0,
@@ -178,7 +180,7 @@ const MOCKED_DATA = {
 	},
 	{
 	country: 'Portugal',
-	countryInfo: { info: ''},
+	countryInfo: { info: '', flag: ''},
 	cases: 1080929,
 	deaths: 18106,
 	recovered: 1032802,
@@ -194,7 +196,7 @@ const MOCKED_DATA = {
 	},
 	{
 	country: 'Singapore',
-	countryInfo: { info: ''},
+	countryInfo: { info: '', flag: ''},
 	cases: 150731,
 	deaths: 239,
 	recovered: 125036,
@@ -210,7 +212,7 @@ const MOCKED_DATA = {
 	},
 	{
 	country: 'China',
-	countryInfo: { info: ''},
+	countryInfo: { info: '', flag: ''},
 	cases: 96571,
 	deaths: 4636,
 	recovered: 91421,
@@ -226,7 +228,7 @@ const MOCKED_DATA = {
 	},
 	{
 	country: 'French Polynesia',
-	countryInfo: { info: ''},
+	countryInfo: { info: '', flag: ''},
 	cases: 40178,
 	deaths: 635,
 	recovered: 33500,

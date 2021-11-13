@@ -1,8 +1,14 @@
-import React from 'react';
 import './Dropdown.css'
+import { ResponeData } from '../../interfaces';
 
-const Dropdown = (props) => {
-  const clickItemHandler = (event) => {
+interface Props {
+  data: ResponeData,
+  userInput: string,
+  onCountryName: Function
+}
+
+const Dropdown = (props: Props) => {
+  const clickItemHandler = (event: any) => {
     props.onCountryName(event.target.textContent)
   }
   const countries = props.data.data.map(el => {

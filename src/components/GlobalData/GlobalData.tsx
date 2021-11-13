@@ -1,18 +1,23 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import React from 'react';
 import ReactTooltip from 'react-tooltip';
 import tooltipIcon from '../../assets/icons/tooltip.png'
-import { useEffect, useState } from 'react/cjs/react.development';
+import { useEffect, useState } from 'react';
 import './GlobalData.css'
 import GlobalDataSingleItem from './GlobalDataSingleItem';
 import MOCKED_DATA from '../../MOCKED_DATA';
 import Checkbox from '../UI/Checkbox';
+import { ResponseDataProp, ResponeData } from '../../interfaces';
 
-const GlobalData = (props) => {
+interface Props {
+  onGetData: Function
+}
+
+const GlobalData = (props: Props) => {
   const countiresToDisplay = 5;
   const tooltipInfo = 'Top countires (population over 0.5 mln) with active cases per one million'
-  const [data, setData] = useState([]);
-  const [originalData, setOriginalData] = useState([])
+  const [data, setData] = useState<ResponseDataProp[]>([]);
+  const [originalData, setOriginalData] = useState<ResponeData>([] as any);
   const [isLoading, setIsLoading] = useState(true); 
   const [isMockedData, setIsMockedData] = useState(false);
  
@@ -20,12 +25,12 @@ const GlobalData = (props) => {
     getData();
    }, []);
 
-  const filterData = (data) => {
+  const filterData = (data: AxiosResponse<ResponseDataProp[]> | ResponeData) => {
     props.onGetData(data);
-    const filteredData = data.data.sort((a, b) => {
+    const filteredData = data.data.sort((a: ResponseDataProp, b: ResponseDataProp) => {
       return b.activePerOneMillion - a.activePerOneMillion;
     })
-    const filteredDataByPopulation = filteredData.filter((value) => {
+    const filteredDataByPopulation = filteredData.filter((value: ResponseDataProp) => {
       return value.population > 500000
     })
     setData(filteredDataByPopulation);
@@ -41,15 +46,17 @@ const GlobalData = (props) => {
     }
       setIsLoading(false);
   }
+  
   const topCountries = () => {
-    const countries = []
+    const countries = [];
       for (let x = 0; x < countiresToDisplay; x++) {
         countries.push(
           <GlobalDataSingleItem key={data[x].country} country={data[x].country} activePerOneMillion={data[x].activePerOneMillion}/>)
       };
     return countries
   }
-  const checkboxHandler = (event) => {
+
+  const checkboxHandler = (event: Event) => {
     const filteredData = originalData.data.sort((a, b) => {
       return b.activePerOneMillion - a.activePerOneMillion;
     })

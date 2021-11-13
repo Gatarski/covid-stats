@@ -1,6 +1,15 @@
 import './CountryData.css'
 
-const CountryData = (props) => {
+interface Props {
+  population: number,
+  country: string,
+  flag: string,
+  cases: number,
+  deaths: number,
+  recovered: number
+}
+
+const CountryData = (props: Props) => {
   const countryPopulation = () => {
     return `${(props.population / 1000000).toFixed(2)} mln`
   }
