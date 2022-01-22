@@ -22,16 +22,17 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "e2e": "npx cypress run --spec cypress/integration/covidstat.spec.js"
+    "e2e": "npx cypress run --spec cypress/integration/covidstat.spec.js",
+    "format": "prettier \"src/**/*.{js,html}\" --write"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
     ]
+  },
+  "devDependencies": {
+    "prettier": "^2.5.1"
   },
   "browserslist": {
     "production": [
