@@ -1,11 +1,15 @@
 import "./DetailedCountryData.css";
 import { ResponseDataProp } from "../../interfaces";
+import useKonami from "../../components/Others/useKonami";
 
 interface Props {
   data: ResponseDataProp;
+  isKonami: boolean;
 }
 
 const DetailedCountryData = (props: Props) => {
+  const [value] = useKonami(100000, 1234, props.isKonami);
+
   const percentOfCountryPopulation = (number: number) => {
     return `${(number / props.data.population).toFixed(4)} %`;
   };
@@ -16,7 +20,7 @@ const DetailedCountryData = (props: Props) => {
       <ul className="item-list">
         <li>
           Active cases:
-          <p>{props.data.active}</p>
+          <p>{!props.isKonami ? props.data.active : value}</p>
         </li>
         <li>
           (currently
@@ -25,11 +29,11 @@ const DetailedCountryData = (props: Props) => {
         </li>
         <li>
           Active cases per one million:
-          <p>{props.data.activePerOneMillion}</p>
+          <p>{!props.isKonami ? props.data.activePerOneMillion : value}</p>
         </li>
         <li>
           Deaths per one million:
-          <p>{props.data.deathsPerOneMillion}</p>
+          <p>{!props.isKonami ? props.data.deathsPerOneMillion : value}</p>
         </li>
         <li>
           Tests:
@@ -41,11 +45,11 @@ const DetailedCountryData = (props: Props) => {
         </li>
         <li>
           Today cases:
-          <p>{props.data.todayCases}</p>
+          <p>{!props.isKonami ? props.data.todayCases : value}</p>
         </li>
         <li>
           Today deaths:
-          <p>{props.data.todayDeaths}</p>
+          <p>{!props.isKonami ? props.data.todayDeaths : value}</p>
         </li>
         <li>
           Today recovered:

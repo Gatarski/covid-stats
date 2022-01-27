@@ -1,5 +1,6 @@
 import UserDataRequest from "./components/UserDataRequest/UserDataRequest";
 import Country from "./components/Country/Country";
+import Konami from "./components/Others/Konami";
 import GlobalData from "./components/GlobalData/GlobalData";
 import covidImage from "./assets/images/covid-19.png";
 import "./App.css";
@@ -9,6 +10,7 @@ const App = () => {
   const [inputData, setInputData] = useState<any>({});
   const [isCountryOpen, setIsCountryOpen] = useState(false);
   const [data, setData] = useState<any>({ data: [] });
+  const [isKonami, setIsKonami] = useState(false);
 
   const dataFromInputsHandler = (dataFromInputs: string) => {
     setIsCountryOpen(true);
@@ -25,18 +27,24 @@ const App = () => {
 
   return (
     <>
-      <div className="image">
+      <Konami isKonami={setIsKonami}></Konami>
+      <div className={!isKonami ? "image" : "image rotate"}>
         <img src={covidImage} alt="covid-19"></img>
       </div>
       <div className="main-app">
         <h2>Covid stats ({currentDate()})</h2>
         <UserDataRequest onData={dataFromInputsHandler} data={data} />
         {isCountryOpen && (
-          <Country value={inputData} onClose={closeCountryData} data={data} />
+          <Country
+            value={inputData}
+            onClose={closeCountryData}
+            data={data}
+            isKonami={isKonami}
+          />
         )}
       </div>
       <div className="global-data">
-        <GlobalData onGetData={setData}></GlobalData>
+        <GlobalData onGetData={setData} isKonami={isKonami}></GlobalData>
       </div>
     </>
   );

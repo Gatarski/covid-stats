@@ -11,6 +11,7 @@ import { ResponseDataProp, ResponeData } from "../../interfaces";
 
 interface Props {
   onGetData: Function;
+  isKonami: boolean;
 }
 
 const GlobalData = (props: Props) => {
@@ -64,6 +65,7 @@ const GlobalData = (props: Props) => {
           key={data[x].country}
           country={data[x].country}
           activePerOneMillion={data[x].activePerOneMillion}
+          isKonami={props.isKonami}
         />
       );
     }
