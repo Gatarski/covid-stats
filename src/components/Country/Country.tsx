@@ -5,6 +5,7 @@ import "./Country.css";
 import CountryData from "./CountryData";
 import DetailedCountryData from "./DetailedCountryData";
 import { ResponseDataProp, MockedData } from "../../interfaces";
+import useKonami from "../../components/Others/useKonami";
 
 interface Props {
   data: {
@@ -17,9 +18,12 @@ interface Props {
     country: string;
   };
   onClose: Function;
+  isKonami: boolean;
 }
 
 const Country = (props: Props) => {
+  const [value] = useKonami(100000, 1234, props.isKonami);
+
   const data: any = props.data.data;
   const sourceDataMessage = props.data.mockedData
     ? "dummy data."
@@ -62,12 +66,14 @@ const Country = (props: Props) => {
       <CountryData
         country={filteredData.country}
         flag={countryFlag}
-        cases={filteredData.cases}
-        deaths={filteredData.deaths}
+        cases={!props.isKonami ? filteredData.cases : value}
+        deaths={!props.isKonami ? filteredData.deaths : value}
         recovered={filteredData.recovered}
         population={filteredData.population}
       />
-      {detailedData && <DetailedCountryData data={filteredData} />}
+      {detailedData && (
+        <DetailedCountryData data={filteredData} isKonami={props.isKonami} />
+      )}
       <div className="data-info">Data from: {sourceDataMessage}</div>
       {modalMessage && (
         <Modal

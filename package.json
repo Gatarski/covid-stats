@@ -23,7 +23,7 @@
   "scripts": {
     "start": "react-scripts start",
     "e2e": "npx cypress run --spec cypress/integration/covidstat.spec.js",
-    "format": "prettier \"src/**/*.{js,html}\" --write"
+    "format": "prettier \"src/**/*.{js,html,tsx}\" --write"
   },
   "eslintConfig": {
     "extends": [
