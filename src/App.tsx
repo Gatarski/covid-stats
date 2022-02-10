@@ -6,10 +6,9 @@ import covidImage from "./assets/images/covid-19.png";
 import "./App.css";
 import { useState } from "react";
 
-const App = () => {
+export const App = () => {
   const [inputData, setInputData] = useState<any>({});
   const [isCountryOpen, setIsCountryOpen] = useState(false);
-  const [data, setData] = useState<any>({ data: [] });
   const [isKonami, setIsKonami] = useState(false);
 
   const dataFromInputsHandler = (dataFromInputs: string) => {
@@ -33,18 +32,17 @@ const App = () => {
       </div>
       <div className="main-app">
         <h2>Covid stats ({currentDate()})</h2>
-        <UserDataRequest onData={dataFromInputsHandler} data={data} />
+        <UserDataRequest onData={dataFromInputsHandler} />
         {isCountryOpen && (
           <Country
             value={inputData}
             onClose={closeCountryData}
-            data={data}
             isKonami={isKonami}
           />
         )}
       </div>
       <div className="global-data">
-        <GlobalData onGetData={setData} isKonami={isKonami}></GlobalData>
+        <GlobalData isKonami={isKonami}></GlobalData>
       </div>
     </>
   );

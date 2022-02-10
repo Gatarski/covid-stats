@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
+import { Wrapper } from "./Wrapper";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<Wrapper />, document.getElementById("root"));

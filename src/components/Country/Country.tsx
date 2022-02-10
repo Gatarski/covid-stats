@@ -6,13 +6,9 @@ import CountryData from "./CountryData";
 import DetailedCountryData from "./DetailedCountryData";
 import { ResponseDataProp, MockedData } from "../../interfaces";
 import useKonami from "../../components/Others/useKonami";
+import { useSelector } from "react-redux";
 
 interface Props {
-  data: {
-    data: ResponseDataProp;
-    mockedData: MockedData;
-    error: string;
-  };
   value: {
     checkbox: boolean;
     country: string;
@@ -23,9 +19,9 @@ interface Props {
 
 const Country = (props: Props) => {
   const [value] = useKonami(100000, 1234, props.isKonami);
+  const data = useSelector((state: any) => state.dataReducer);
 
-  const data: any = props.data.data;
-  const sourceDataMessage = props.data.mockedData
+  const sourceDataMessage = data.mockedData
     ? "dummy data."
     : "https://corona.lmao.ninja/v2/";
   const [modalMessage, setModalMessage] = useState("");
@@ -34,10 +30,10 @@ const Country = (props: Props) => {
   const detailedData = props.value.checkbox;
 
   useEffect(() => {
-    if (props.data.error) {
-      setModalMessage(props.data.error);
+    if (data.error) {
+      setModalMessage(data.error);
     }
-  }, [props.data]);
+  }, [data]);
 
   const getDataByCountry = (countryName: string): ResponseDataProp => {
     return data.find((item: ResponseDataProp) => {

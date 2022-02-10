@@ -3,14 +3,15 @@ import Button from "../UI/Button";
 import Checkbox from "../UI/Checkbox";
 import Dropdown from "../UI/Dropdown";
 import "./UserDataRequest.css";
-import { CountryData, ResponeData } from "../../interfaces";
+import { CountryData, ResponseDataProp } from "../../interfaces";
+import { useSelector } from "react-redux";
 
 interface Props {
-  data: ResponeData;
   onData: Function;
 }
 
 const UserDataRequest = (props: Props) => {
+  const data: ResponseDataProp[] = useSelector((state: any) => state.dataReducer);
   const [btnDisabled, setBtnDisabled] = useState({
     btnDisabled: true,
     error: false,
@@ -29,7 +30,7 @@ const UserDataRequest = (props: Props) => {
       return { ...prevVal, country: event.target.value };
     });
 
-    if (event.target.value.length > 1 && props.data.data.length) {
+    if (event.target.value.length > 1 && data.length) {
       setBtnDisabled({ btnDisabled: false, error: false });
       setIsDropdownOpen(true);
     } else {
@@ -84,7 +85,6 @@ const UserDataRequest = (props: Props) => {
         )}
         {isDropdownOpen && (
           <Dropdown
-            data={props.data}
             userInput={countryData.country}
             onCountryName={countryNameFromDropdown}
           ></Dropdown>

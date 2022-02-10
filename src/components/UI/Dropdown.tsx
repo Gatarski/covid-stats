@@ -1,21 +1,23 @@
 import "./Dropdown.css";
-import { ResponeData } from "../../interfaces";
+import { ResponseDataProp } from "../../interfaces";
+import { useSelector } from "react-redux";
 
 interface Props {
-  data: ResponeData;
   userInput: string;
   onCountryName: Function;
 }
 
 const Dropdown = (props: Props) => {
+  const data: ResponseDataProp[] = useSelector((state: any) => state.dataReducer);
   const clickItemHandler = (event: any) => {
     props.onCountryName(event.target.textContent);
   };
-  const countries = props.data.data.map((el) => {
+
+  const countries = data.map((el: ResponseDataProp) => {
     return el.country;
   });
   const sortedData = countries.sort();
-  const filteredCountries = sortedData.map((country) => {
+  const filteredCountries = sortedData.map((country: any) => {
     if (
       country
         .toLowerCase()

@@ -8,9 +8,9 @@ import GlobalDataSingleItem from "./GlobalDataSingleItem";
 import MOCKED_DATA from "../../MOCKED_DATA";
 import Checkbox from "../UI/Checkbox";
 import { ResponseDataProp, ResponeData } from "../../interfaces";
+import { useDispatch, useSelector } from "react-redux";
 
 interface Props {
-  onGetData: Function;
   isKonami: boolean;
 }
 
@@ -18,10 +18,11 @@ const GlobalData = (props: Props) => {
   const countiresToDisplay = 5;
   const tooltipInfo =
     "Top countires (population over 0.5 mln) with active cases per one million";
-  const [data, setData] = useState<ResponseDataProp[]>([]);
   const [originalData, setOriginalData] = useState<ResponeData>([] as any);
   const [isLoading, setIsLoading] = useState(true);
   const [isMockedData, setIsMockedData] = useState(false);
+  const dispatch = useDispatch();
+  const data: ResponseDataProp[] = useSelector((state: any) => state.dataReducer);
 
   useEffect(() => {
     getData();
@@ -30,7 +31,6 @@ const GlobalData = (props: Props) => {
   const filterData = (
     data: AxiosResponse<ResponseDataProp[]> | ResponeData
   ) => {
-    props.onGetData(data);
     const filteredData = data.data.sort(
       (a: ResponseDataProp, b: ResponseDataProp) => {
         return b.activePerOneMillion - a.activePerOneMillion;
@@ -41,7 +41,7 @@ const GlobalData = (props: Props) => {
         return value.population > 500000;
       }
     );
-    setData(filteredDataByPopulation);
+    dispatch({ type: "FETCH_DATA", payload: filteredDataByPopulation })
   };
   const getData = async () => {
     try {
@@ -58,7 +58,7 @@ const GlobalData = (props: Props) => {
   };
 
   const topCountries = () => {
-    const countries = [];
+    const countries: any = [];
     for (let x = 0; x < countiresToDisplay; x++) {
       countries.push(
         <GlobalDataSingleItem
@@ -76,7 +76,7 @@ const GlobalData = (props: Props) => {
     const filteredData = originalData.data.sort((a, b) => {
       return b.activePerOneMillion - a.activePerOneMillion;
     });
-    !event ? setData(filteredData) : filterData(originalData);
+    !event ? dispatch({ type: "FETCH_DATA", payload: filteredData }) : filterData(originalData);
   };
 
   return (
