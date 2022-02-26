@@ -4,14 +4,11 @@ import Checkbox from "../UI/Checkbox";
 import Dropdown from "../UI/Dropdown";
 import "./UserDataRequest.css";
 import { CountryData, ResponseDataProp } from "../../interfaces";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-interface Props {
-  onData: Function;
-}
-
-const UserDataRequest = (props: Props) => {
-  const data: ResponseDataProp[] = useSelector((state: any) => state.dataReducer);
+const UserDataRequest = () => {
+  const dispatch = useDispatch();
+  const data: ResponseDataProp[] = useSelector((state: any) => state.dataReducer.fetchedData);
   const [btnDisabled, setBtnDisabled] = useState({
     btnDisabled: true,
     error: false,
@@ -47,7 +44,7 @@ const UserDataRequest = (props: Props) => {
     setCountryData((prevVal) => {
       return { ...prevVal, checkbox: isChecked };
     });
-    props.onData(countryData);
+    dispatch({ type: "USER_INPUT", payload: countryData })
     clearInputs();
   };
 

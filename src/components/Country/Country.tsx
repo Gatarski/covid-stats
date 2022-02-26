@@ -4,30 +4,26 @@ import Modal from "../UI/Modal";
 import "./Country.css";
 import CountryData from "./CountryData";
 import DetailedCountryData from "./DetailedCountryData";
-import { ResponseDataProp, MockedData } from "../../interfaces";
+import { ResponseDataProp } from "../../interfaces";
 import useKonami from "../../components/Others/useKonami";
 import { useSelector } from "react-redux";
 
 interface Props {
-  value: {
-    checkbox: boolean;
-    country: string;
-  };
   onClose: Function;
   isKonami: boolean;
 }
 
 const Country = (props: Props) => {
   const [value] = useKonami(100000, 1234, props.isKonami);
-  const data = useSelector((state: any) => state.dataReducer);
-
+  const data = useSelector((state: any) => state.dataReducer.fetchedData);
+  const countryData= useSelector((state: any) => state.dataReducer.userInput)
   const sourceDataMessage = data.mockedData
     ? "dummy data."
     : "https://corona.lmao.ninja/v2/";
   const [modalMessage, setModalMessage] = useState("");
   let countryFlag = "";
   let filteredData: ResponseDataProp = {} as any;
-  const detailedData = props.value.checkbox;
+  const detailedData = countryData.checkbox;
 
   useEffect(() => {
     if (data.error) {
@@ -46,12 +42,12 @@ const Country = (props: Props) => {
   };
 
   const filterData = () => {
-    if (getDataByCountry(props.value.country)) {
-      filteredData = getDataByCountry(props.value.country);
+    if (getDataByCountry(countryData.country)) {
+      filteredData = getDataByCountry(countryData.country);
       countryFlag = filteredData.countryInfo.flag;
     } else {
       if (!modalMessage) {
-        setModalMessage(`Country ${props.value.country} does not exist`);
+        setModalMessage(`Country ${countryData.country} does not exist`);
       }
     }
   };

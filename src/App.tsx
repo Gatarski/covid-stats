@@ -4,17 +4,20 @@ import Konami from "./components/Others/Konami";
 import GlobalData from "./components/GlobalData/GlobalData";
 import covidImage from "./assets/images/covid-19.png";
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 export const App = () => {
-  const [inputData, setInputData] = useState<any>({});
   const [isCountryOpen, setIsCountryOpen] = useState(false);
   const [isKonami, setIsKonami] = useState(false);
-
-  const dataFromInputsHandler = (dataFromInputs: string) => {
-    setIsCountryOpen(true);
-    setInputData(dataFromInputs);
-  };
+  const countryData = useSelector((state: any) => state.dataReducer.userInput)
+  
+  useEffect(() => {
+    if (countryData.country) {
+      setIsCountryOpen(true);
+    }
+    
+  }, [countryData])
 
   const closeCountryData = () => {
     setIsCountryOpen(false);
@@ -32,10 +35,9 @@ export const App = () => {
       </div>
       <div className="main-app">
         <h2>Covid stats ({currentDate()})</h2>
-        <UserDataRequest onData={dataFromInputsHandler} />
+        <UserDataRequest />
         {isCountryOpen && (
           <Country
-            value={inputData}
             onClose={closeCountryData}
             isKonami={isKonami}
           />

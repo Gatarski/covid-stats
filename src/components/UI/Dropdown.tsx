@@ -8,7 +8,7 @@ interface Props {
 }
 
 const Dropdown = (props: Props) => {
-  const data: ResponseDataProp[] = useSelector((state: any) => state.dataReducer);
+  const data: ResponseDataProp[] = useSelector((state: any) => state.dataReducer.fetchedData);
   const clickItemHandler = (event: any) => {
     props.onCountryName(event.target.textContent);
   };
