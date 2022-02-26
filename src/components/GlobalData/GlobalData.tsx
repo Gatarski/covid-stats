@@ -22,7 +22,7 @@ const GlobalData = (props: Props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isMockedData, setIsMockedData] = useState(false);
   const dispatch = useDispatch();
-  const data: ResponseDataProp[] = useSelector((state: any) => state.dataReducer);
+  const data: ResponseDataProp[] = useSelector((state: any) => state.dataReducer.fetchedData);
 
   useEffect(() => {
     getData();
